@@ -5,33 +5,36 @@ import { Modal } from 'components/Modal/Modal';
 
 export class ImageGalleryItem extends Component {
   state = {
-    modalOn: false,
+    isModalOpen: false,
   };
 
   openModal = () => {
-    this.setState({ modalOn: true });
+    this.setState({ isModalOpen: true });
   };
 
   closeModal = () => {
-    this.setState({ modalOn: false });
+    this.setState({ isModalOpen: false });
   };
 
   render() {
-    const { image } = this.props;
+    const { pic, largePic, tags } = this.props;
     return (
       <li className={css.ImageGalleryItem}>
-        <img
-          src={image.webformatURL}
-          alt={image.tags}
-          onClick={this.openModal}
-        />
-
-        {this.state.modalOn && (
+        <img src={pic} alt={tags} onClick={this.openModal} />
+        {this.state.isModalOpen && (
           <div onClick={this.closeModal}>
-            <Modal src={image.largeImageURL} alt={image.tags} />
+            <Modal src={largePic} tags={tags} />
           </div>
         )}
       </li>
     );
   }
 }
+
+ImageGalleryItem.propTypes = {
+  openModal: PropTypes.func,
+  closeModal: PropTypes.func,
+  pic: PropTypes.string,
+  largePic: PropTypes.string,
+  tags: PropTypes.string,
+};

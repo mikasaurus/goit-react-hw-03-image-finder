@@ -10,7 +10,14 @@ export class ImageGallery extends Component {
     return (
       <ul className={css.ImageGallery}>
         {images.map(img => {
-          return <ImageGalleryItem key={img.id} image={img} />;
+          return (
+            <ImageGalleryItem
+              key={img.id}
+              pic={img.webformatURL}
+              largePic={img.largeImageURL}
+              tags={img.tags}
+            />
+          );
         })}
       </ul>
     );
