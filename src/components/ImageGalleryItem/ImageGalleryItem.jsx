@@ -16,6 +16,12 @@ export class ImageGalleryItem extends Component {
     this.setState({ isModalOpen: false });
   };
 
+  closeOnEsc = eve => {
+    if (eve.key === 'Escape') {
+      this.closeModal();
+    }
+  };
+
   render() {
     const { pic, largePic, tags } = this.props;
     return (
@@ -28,6 +34,14 @@ export class ImageGalleryItem extends Component {
         )}
       </li>
     );
+  }
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.closeOnEsc);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.closeOnEsc);
   }
 }
 
